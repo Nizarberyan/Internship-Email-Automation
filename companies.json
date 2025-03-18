@@ -1,0 +1,122 @@
+[
+    {
+        "name": "HIGH IT LAB",
+        "email": "contact@highitlab.com",
+        "contact_person": "HR Manager",
+        "position": "Full Stack Web Developer",
+        "language": "English",
+        "city": "Tangier",
+        "is_sent": true
+    },
+    {
+        "name": "HALA TECHNO",
+        "email": "contact@halatechno.com",
+        "contact_person": "HR Manager",
+        "position": "Full Stack Web Developer",
+        "language": "English",
+        "city": "Tangier",
+        "is_sent": true
+    },
+    {
+        "name": "Nosturm",
+        "email": "contact@nostrum.ma",
+        "contact_person": "HR Manager",
+        "position": "Full Stack Web Developer",
+        "language": "French",
+        "city": "Tangier",
+        "is_sent": true
+    },
+    {
+        "name": "Konfigear",
+        "email": "contact@konfigear.com",
+        "contact_person": "Contact Manager",
+        "position": "Full Stack Web Developer",
+        "language": "English",
+        "city": "Tangier",
+        "is_sent": true
+    },
+    {
+        "name": "solinnova",
+        "email": "contact@solinnova.ma",
+        "contact_person": "Contact Manager",
+        "position": "Full Stack Web Developer",
+        "language": "English",
+        "city": "Tangier",
+        "phone": "+212702667577",
+        "is_sent": true
+    },
+    {
+        "name": "DevIt Technologie",
+        "email": "contact.devtitechnologie@gmail.com",
+        "contact_person": "Contact Manager",
+        "position": "Full Stack Web Developer",
+        "language": "English",
+        "city": "Tangier",
+        "is_sent": true
+    },
+    {
+        "name": "Datatika",
+        "email": "contact@datatika.com",
+        "contact_person": "Contact Manager",
+        "position": "Full Stack Web Developer",
+        "language": "English",
+        "city": "Tangier",
+        "is_sent": true
+    },
+    {
+        "name": "Ai Wolves",
+        "email": "kassoumohamed@outlook.com",
+        "contact_person": "Contact Manager",
+        "position": "Full Stack Web Developer",
+        "language": "French",
+        "city": "Tangier",
+        "is_sent": true
+    },
+    {
+        "name": "Smodu",
+        "email": "contact@smodu.com",
+        "contact_person": "Contact Manager",
+        "position": "Full Stack Web Developer",
+        "language": "English",
+        "city": "Tangier",
+        "is_sent": true
+    },
+    {
+        "name": "ESHIFT",
+        "email": "almejdoubi@gmail.com",
+        "contact_person": "Contact Manager",
+        "position": "Full Stack Web Developer",
+        "language": "French",
+        "city": "Tangier",
+        "is_sent": true
+    },
+    {
+        "name": "AYL AGENCY",
+        "email": "contact@aylagency.com",
+        "contact_person": "Contact Manager",
+        "position": "Full Stack Web Developer",
+        "language": "French",
+        "city": "Tangier",
+        "is_sent": true
+    },
+    {
+        "name": "POSTGOO",
+        "email": "contact@postgoo.com",
+        "contact_person": "Contact Manager",
+        "position": "Full Stack Web Developer",
+        "language": "English",
+        "city": "Tangier",
+        "phone": "+212660333340",
+        "is_sent": true
+    },
+    {
+        "name": "Dynaas",
+        "email": "contact@dynaas.com",
+        "contact_person": "Contact Manager",
+        "position": "Full Stack Web Developer",
+        "language": "French",
+        "city": "Tangier",
+        "phone": "+212660121413",
+        "is_sent": true
+    }
+]
