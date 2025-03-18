@@ -9,29 +9,103 @@ from email.mime.base import MIMEBase
 from email import encoders
 from google import genai
 from dotenv import load_dotenv
+import sys
 
 # Load environment variables from .env file
 load_dotenv()
 
+# Function to check if all required environment variables are set
+def check_environment_variables():
+    required_vars = {
+        "MY_NAME": os.getenv("MY_NAME"),
+        "MY_EMAIL": os.getenv("MY_EMAIL"),
+        "MY_PHONE": os.getenv("MY_PHONE"),
+        "MY_RESUME_PATH": os.getenv("MY_RESUME_PATH"),
+        "SMTP_SERVER": os.getenv("SMTP_SERVER"),
+        "SMTP_PORT": os.getenv("SMTP_PORT"),
+        "EMAIL_USERNAME": os.getenv("EMAIL_USERNAME"),
+        "EMAIL_PASSWORD": os.getenv("EMAIL_PASSWORD"),
+        "TEST_EMAIL": os.getenv("TEST_EMAIL"),
+        "GEMINI_API_KEY": os.getenv("GEMINI_API_KEY")
+    }
+    
+    missing_vars = [var for var, value in required_vars.items() if not value]
+    
+    if missing_vars:
+        print("❌ ERROR: The following required environment variables are missing:")
+        for var in missing_vars:
+            print(f"  - {var}")
+        print("\nPlease add these variables to your .env file and try again.")
+        sys.exit(1)
+    
+    # Check if resume file exists
+    if not os.path.exists(required_vars["MY_RESUME_PATH"]):
+        print(f"❌ ERROR: Resume file not found at {required_vars['MY_RESUME_PATH']}")
+        print("Please check the MY_RESUME_PATH variable in your .env file.")
+        sys.exit(1)
+    
+    return required_vars
+
+# Check if companies.json file exists
+def check_companies_file():
+    companies_file = "companies.json"
+    if not os.path.exists(companies_file):
+        print(f"❌ ERROR: Required file '{companies_file}' not found.")
+        print(f"Please create a '{companies_file}' file in the same directory as this script.")
+        print("The file should contain an array of company objects with the following structure:")
+        print("""
+Example:
+[
+    {
+        "name": "Company Name",
+        "email": "contact@company.com",
+        "contact_person": "Hiring Manager",
+        "language": "English",
+        "city": "City Name",
+        "is_sent": false
+    }
+]
+        """)
+        sys.exit(1)
+    
+    try:
+        with open(companies_file, "r", encoding="utf-8") as file:
+            companies_data = json.load(file)
+            
+        if not isinstance(companies_data, list) or not companies_data:
+            print(f"❌ ERROR: '{companies_file}' has an invalid format. It should contain an array of company objects.")
+            sys.exit(1)
+            
+        return companies_data
+    except json.JSONDecodeError:
+        print(f"❌ ERROR: '{companies_file}' contains invalid JSON.")
+        print("Please check the file format and fix any syntax errors.")
+        sys.exit(1)
+    except Exception as e:
+        print(f"❌ ERROR: Failed to read '{companies_file}': {e}")
+        sys.exit(1)
+
+# Check environment variables and get their values
+env_vars = check_environment_variables()
+
 # Personal information from .env
-MY_NAME = os.getenv("MY_NAME")
-MY_EMAIL = os.getenv("MY_EMAIL")
-MY_PHONE = os.getenv("MY_PHONE")
-MY_RESUME_PATH = os.getenv("MY_RESUME_PATH")
+MY_NAME = env_vars["MY_NAME"]
+MY_EMAIL = env_vars["MY_EMAIL"]
+MY_PHONE = env_vars["MY_PHONE"]
+MY_RESUME_PATH = env_vars["MY_RESUME_PATH"]
 
 # Email configuration from .env
-SMTP_SERVER = os.getenv("SMTP_SERVER")
-SMTP_PORT = int(os.getenv("SMTP_PORT", "587"))
-SENDER_EMAIL = os.getenv("EMAIL_USERNAME")
-SENDER_PASSWORD = os.getenv("EMAIL_PASSWORD")
-TEST_EMAIL = os.getenv("TEST_EMAIL")
+SMTP_SERVER = env_vars["SMTP_SERVER"]
+SMTP_PORT = int(env_vars["SMTP_PORT"])
+SENDER_EMAIL = env_vars["EMAIL_USERNAME"]
+SENDER_PASSWORD = env_vars["EMAIL_PASSWORD"]
+TEST_EMAIL = env_vars["TEST_EMAIL"]
 
 # API keys from .env
-gemini_api_key = os.getenv("GEMINI_API_KEY")
+gemini_api_key = env_vars["GEMINI_API_KEY"]
 
 # Load company details from JSON
-with open("companies.json", "r", encoding="utf-8") as file:
-    companies = json.load(file)
+companies = check_companies_file()
 
 # Email templates using Jinja2
 email_template_en = f"""
